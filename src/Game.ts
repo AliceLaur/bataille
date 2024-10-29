@@ -5,14 +5,16 @@ import { Deck } from './Deck';
 export class Game {
     private player1: Player;
     private player2: Player;
-    private turn: number;
+    private round: number;
+    private field: Deck;
     private max_turns: number;
     
 
-    constructor(player1: Player, player2: Player, turn: number, max_turns: number) {
-        this.player1 = new Player(1, 0, new Deck([]).firstHalf);
-        this.player2 = new Player(2, 0, new Deck([]).secondHalf);
-        this.turn = 0;
+    constructor(player1: Player, player2: Player, round: number, max_turns: number, field: Deck) {
+        this.player1 = new Player(1, 0, new Deck([]).getCards());
+        this.player2 = new Player(2, 0, new Deck([]).getCards());
+        this.round = 0;
+        this.field = new Deck([]);
         this.max_turns = 200;
     }
 
