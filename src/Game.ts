@@ -108,7 +108,7 @@ export class Game {
         } else if (this.player2.hasCards() && !this.player1.hasCards()) {
             console.log(`${this.player2.getName()} wins the game!`);
         } else {
-            console.log(`The game ends because you reach the maximum rounds and you're tired to play... Take a coffee and try again !`);
+            console.log(`The game ends because you've reached the maximum rounds and you're tired to play... Take a coffee and try again !`);
         }
     }
 }
