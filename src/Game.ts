@@ -139,13 +139,16 @@ export class Game {
     private declareWinner(): void {
         // Display the winner of the game
         console.log(`--- Game Over after ${this.round} rounds ---`);
-        // If player 1 has cards and player 2 doesn't
-        if (this.player1.hasCards() && !this.player2.hasCards()) {
-            console.log(`${this.player1.getName()} wins the game!`);
-        // If player 2 has cards and player 1 doesn't
-        } else if (this.player2.hasCards() && !this.player1.hasCards()) {
-            console.log(`${this.player2.getName()} wins the game!`);
-        // If both players have cards but you've reached the maximum rounds
+
+        // If both players have cards
+        if ((this.player1.hasCards() && !this.player2.hasCards()) || (this.player2.hasCards() && !this.player1.hasCards())) {
+            console.log(`The game ends because one of the players doesn't have cards anymore.`);
+            // determine which player has cards and declare them the winner
+            if (this.player1.hasCards()) {
+                console.log(`${this.player1.getName()} wins the game!`);
+            } else {
+                console.log(`${this.player2.getName()} wins the game!`);
+            }
         } else {
             console.log(`The game ends because you've reached the maximum rounds and you're tired to play... Take a coffee and try again !`);
         }
