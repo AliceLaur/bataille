@@ -8,15 +8,17 @@ export class Game {
     private round: number;
     private maxRound: number;
     private field: Card[];
+    private warCount: number;
     
     
-    constructor(player1Name: string, player2Name: string, maxRound: number, field: Card[] = []) {
+    constructor(player1Name: string, player2Name: string, maxRound: number, field: Card[] = [], warCount: number = 0) {
         const { player1Game, player2Game } = this.deal();
         this.player1 = new Player(player1Name, player1Game);
         this.player2 = new Player(player2Name, player2Game);
         this.round = 0;
         this.maxRound = maxRound;
         this.field = field;
+        this.warCount = warCount;
     }
 
     private deal(): { player1Game: Card[]; player2Game: Card[] } {
@@ -56,7 +58,8 @@ export class Game {
     }
 
     private playRound(): void {
-
+        // increment the round count
+        this.round++;
         // Reset the field for each round
         this.field = [];
 
@@ -85,6 +88,8 @@ export class Game {
     }
 
     private initiateWar(): void {
+        // Increment the war count
+        this.warCount++;
         // Each player places three cards face-down
         for (let i = 0; i < 3; i++) {
             const faceDown1 = this.player1.drawCard();
@@ -145,12 +150,12 @@ export class Game {
             console.log(`The game ends because one of the players doesn't have cards anymore.`);
             // determine which player has cards and declare them the winner
             if (this.player1.hasCards()) {
-                console.log(`${this.player1.getName()} wins the game!`);
+                console.log(`You made ${this.warCount} wars and ${this.player1.getName()} wins the game!`);
             } else {
-                console.log(`${this.player2.getName()} wins the game!`);
+                console.log(`You made ${this.warCount} wars and ${this.player2.getName()} wins the game!`);
             }
         } else {
-            console.log(`The game ends because you've reached the maximum rounds and you're tired to play... Take a coffee and try again !`);
+            console.log(`The game ends because you've reached the maximum rounds and you're tired to play...\nYou made ${this.warCount} wars.\nTake a coffee and try again !`);
         }
     }
 }
