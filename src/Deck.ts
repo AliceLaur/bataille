@@ -7,9 +7,7 @@ export class Deck {
 
     constructor(cards?: Card[]) {
         this.cards = cards || [];
-        if (this.cards.length === 0) {
-            this.createDeck();
-        }
+        this.createDeck();
     }
 
     public addCard(card: Card): void {
@@ -38,43 +36,27 @@ export class Deck {
         this.cards.sort(() => Math.random() - 0.5);
     }
 
-    // public separateDeck(): void {
-    //     // Shuffle the deck of cards
-    //     const shuffledDeck = this.Cards.sort(() => Math.random() - 0.5);
-    //     // Split the deck in half
-    //     const half = Math.ceil(shuffledDeck.length / 2);
-    //     this.firstHalf = shuffledDeck.splice(0, half);
-    //     this.secondHalf = shuffledDeck.splice(-half);
-    // }
-
     public displayDeck(): void {
         this.cards.forEach(card => {
             console.log(card.display());
         });
     }
 
-    // public displayFirstHalf(): void {
-    //     this.firstHalf.forEach(card => {
-    //         console.log("First half",card.display());
-    //     });
-    // }
-
-    // public displaySecondHalf(): void {
-    //     this.secondHalf.forEach(card => {
-    //         console.log("Second half",card.display());
-    //     });
-    // }
-
     public deal(): { player1Game: Card[]; player2Game: Card[] } {
+        // Create two arrays to store the cards for each player
         const player1Game: Card[] = [];
         const player2Game: Card[] = [];
+
+        // Go through all the cards in the deck
         this.cards.forEach((card, index) => {
+            // If the index is even, add the card to player 1's game otherwise add it to player 2's game
             if (index % 2 === 0) {
                 player1Game.push(card);
             } else {
                 player2Game.push(card);
             }
         });
+        // Return the two arrays
         return { player1Game, player2Game };
     }
     
