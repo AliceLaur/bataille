@@ -22,13 +22,13 @@ export class Game {
     private deal(): { player1Game: Card[]; player2Game: Card[] } {
         const deck = new Deck();
         deck.shuffleDeck();
-        // Create two arrays to store the cards for each player
+        // Create two arrays to store the cards
         const player1Game: Card[] = [];
         const player2Game: Card[] = [];
 
         // Go through all the cards in the deck
         deck.getCards().forEach((card, index) => {
-            // If the index is even, add the card to player 1's game otherwise add it to player 2's game
+            // If the index is even, add the card to player1 if not add it to player2
             if (index % 2 === 0) {
                 player1Game.push(card);
             } else {
@@ -42,7 +42,8 @@ export class Game {
     public run(): void {
         // Display the players and the number of cards they have (it should be 26)
         console.log(`Starting game between ${this.player1.getName()} and ${this.player2.getName()}!\n`);
-        // while both players have cards and the round is less than the max round, you keep playing
+
+        // while players have cards and the round is less than the max round, you keep playing
         while (this.player1.hasCards() && this.player2.hasCards() && this.round < this.maxRound) {
             this.round++;
             console.log(`--- Round ${this.round} ---`);
@@ -101,7 +102,7 @@ export class Game {
             // Add the face-up cards to the field
             this.field.push(faceUp1, faceUp2);
     
-            // Display the actions of both players
+            // Display the cards of both players
             console.log(`${this.player1.getName()} places 3 cards face-down and draws: ${faceUp1.display()}`);
             console.log(`${this.player2.getName()} places 3 cards face-down and draws: ${faceUp2.display()}`);
     
@@ -109,18 +110,18 @@ export class Game {
             if (faceUp1.getValue() > faceUp2.getValue()) {
                 console.log(`${this.player1.getName()} wins the war.\n`);
                 this.player1.addCards(this.field);
-                this.field = []; // Reset the field for the next round
+                this.field = []; 
             } else if (faceUp1.getValue() < faceUp2.getValue()) {
                 console.log(`${this.player2.getName()} wins the war.\n`);
                 this.player2.addCards(this.field);
-                this.field = []; // Reset the field for the next round
+                this.field = []; 
             } else {
                 // If there's a tie, initiate another war recursively
                 console.log(`Oh, there's another tie. War continues...\n`);
                 this.initiateWar();
             }
         } else {
-            // Handle scenarios where one or both players cannot continue the war
+            // Handle scenarios where players can't continue the game
             if (!faceUp1 && !faceUp2) {
                 console.log(`Both players can't continue the war.`);
             } else if (!faceUp1) {
@@ -130,7 +131,8 @@ export class Game {
                 console.log(`${this.player2.getName()} can't continue the war! ${this.player1.getName()} wins the war.\n`);
                 this.player1.addCards(this.field);
             }
-            this.field = []; // Reset the field after the war concludes
+            // Reset the field after the war concludes
+            this.field = []; 
         }
     }    
 

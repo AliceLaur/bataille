@@ -6,7 +6,7 @@ import { Suit } from "./Suit";
 
 const player1 = new Player("Francis", []);
 const player2 = new Player("Jeannette", []);
-const game = new Game("Francis", "Jeannette", 50);
+const game = new Game("Francis", "Jeannette", 10000);
 game.run();
 console.log(Object.values(Suit))
 
