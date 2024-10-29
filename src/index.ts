@@ -1,7 +1,10 @@
 // src/index.ts
 import { Deck } from "./Deck";
-console.log("Hello, TypeScript with Node!");
+import { Game } from "./Game";
+import { Player } from "./Player";
 
-const deck = new Deck([]);
-deck.createDeck();
-deck.displayDeck();
+const player1 = new Player("Francis", []);
+const player2 = new Player("Jeannette", []);
+const game = new Game("Francis", "Jeannette", 50);
+game.run();
+

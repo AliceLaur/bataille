@@ -5,8 +5,11 @@ import { Suit } from './Suit';
 export class Deck {
     private cards: Card[];
 
-    constructor(cards: Card[]) {
-        this.cards = cards;
+    constructor(cards?: Card[]) {
+        this.cards = cards || [];
+        if (this.cards.length === 0) {
+            this.createDeck();
+        }
     }
 
     public addCard(card: Card): void {
@@ -18,6 +21,7 @@ export class Deck {
     }
 
     public createDeck(): void {
+        // Get all the suits and figures as arrays
         const suits = Object.values(Suit) as Suit[]
         const figures = Object.values(Figure) as Figure[]
         // Go trough all the suits
@@ -31,7 +35,7 @@ export class Deck {
     }
 
     public shuffleDeck(): void {
-        const shuffledDeck = this.cards.sort(() => Math.random() - 0.5);
+        this.cards.sort(() => Math.random() - 0.5);
     }
 
     // public separateDeck(): void {
@@ -60,4 +64,18 @@ export class Deck {
     //         console.log("Second half",card.display());
     //     });
     // }
+
+    public deal(): { player1Game: Card[]; player2Game: Card[] } {
+        const player1Game: Card[] = [];
+        const player2Game: Card[] = [];
+        this.cards.forEach((card, index) => {
+            if (index % 2 === 0) {
+                player1Game.push(card);
+            } else {
+                player2Game.push(card);
+            }
+        });
+        return { player1Game, player2Game };
+    }
+    
 }
