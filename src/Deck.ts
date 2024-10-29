@@ -3,6 +3,9 @@ import { Figure } from './Figure';
 import { Suit } from './Suit';
 
 export class Deck {
+    deal(): { player1Game: any; player2Game: any; } {
+        throw new Error('Method not implemented.');
+    }
     private cards: Card[];
 
     constructor(cards?: Card[]) {
@@ -40,24 +43,6 @@ export class Deck {
         this.cards.forEach(card => {
             console.log(card.display());
         });
-    }
-
-    public deal(): { player1Game: Card[]; player2Game: Card[] } {
-        // Create two arrays to store the cards for each player
-        const player1Game: Card[] = [];
-        const player2Game: Card[] = [];
-
-        // Go through all the cards in the deck
-        this.cards.forEach((card, index) => {
-            // If the index is even, add the card to player 1's game otherwise add it to player 2's game
-            if (index % 2 === 0) {
-                player1Game.push(card);
-            } else {
-                player2Game.push(card);
-            }
-        });
-        // Return the two arrays
-        return { player1Game, player2Game };
     }
     
 }

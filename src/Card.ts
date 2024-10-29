@@ -12,6 +12,8 @@ export class Card {
         this.figure = figure;
     }
 
+    
+
     public getValue(): number {
         return this.value;
     }
